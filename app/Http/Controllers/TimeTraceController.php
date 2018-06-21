@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\TimeBlock;
 use Illuminate\Http\Request;
-header('Access-Control-Allow-Origin: *');
 
 class TimeTraceController extends Controller
 {
@@ -12,9 +12,9 @@ class TimeTraceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request,TimeBlock $block)
     {
-        return $request->all();
+        return response($block->getBlock($request->input('user'),$request->input('belong')));
     }
 
     /**
@@ -33,9 +33,10 @@ class TimeTraceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,TimeBlock $block)
     {
-        //
+        $res = $block->saveBlock($request->all());
+        return response($res?'success':'fail');
     }
 
     /**
