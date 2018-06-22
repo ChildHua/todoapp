@@ -12,8 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('passport');
 });
-Route::get('/test',function (){
+Route::get('/ProxyHelpers.php',function (){
     return 'test';
 });
+
+Route::post('/login','Auth\LoginController@login');
+Route::post('/register','Auth\RegisterController@register');
+//Route::post('/login',function (){
+//    return 11;
+//});
